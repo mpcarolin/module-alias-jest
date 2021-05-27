@@ -31,7 +31,7 @@ const resolveAbsolutes = (aliases, location) => {
  * @param {string?} options.root - app root path to search for a package.json file. If omitted, registerAliases uses the appRootPath.
  * @param {boolean} resolve - If true, registerAliases will resolve full file paths for the alias values, relative to options.root, (defaults to true)
  */
-const registerAliases = ({ root=appRoot, resolve=true }) => {
+const registerAliases = ({ root=appRoot, resolve=true }={}) => {
   const pkgAliases = getPackageAliases(root)
 
   state.aliases = resolve
