@@ -1,6 +1,6 @@
 {
   "name": "module-alias-jest",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Define your node path aliases once, use everywhere",
   "main": "index.js",
   "author": "mpcarolin.dev@gmail.com",

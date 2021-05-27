@@ -1,7 +1,16 @@
 # Description
-`module-alias-jest` enables you to setup your module aliases in one place (e.g. your package.json), then use them in both jest and node runtimes.
+`module-alias-jest` enables you to setup your module aliases in one place (e.g. your package.json), then use them in both jest tests and elsewhere.
 
 It wraps [module-alias](https://github.com/ilearnio/module-alias), so it also has all of the same requirements and caveats as that package.
+
+## Install
+```bash
+# npm
+npm install module-alias-jest
+
+# yarn
+yarn add module-alias-jest
+```
 
 ## Usage
 
@@ -26,7 +35,7 @@ module.exports = {
 const utils = require('@utils')
 describe('utils', () => {...})
 
-// entrypoint.js
+// app-entrypoint.js
 require('module-alias-jest/register')
 const utils = require('@utils')
 utils.doSomething()
