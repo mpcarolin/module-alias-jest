@@ -1,5 +1,5 @@
 const { registerAliases } = require('./src')
 
-const result = registerAliases()
+const aliases = registerAliases()
 
-module.exports = result
+module.exports = aliases

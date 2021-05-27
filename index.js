@@ -1,3 +1,3 @@
 module.exports = {
-  ...require('./src/aliases'),
+  ...require('./src'),
 }

@@ -6,6 +6,9 @@
   "author": "mpcarolin.dev@gmail.com",
   "license": "MIT",
   "private": false,
+  "repository": {
+    "url": "https://github.com/mpcarolin/module-alias-jest"
+  },
   "scripts": {
     "test": "yarn jest",
     "demo": "node demo.js"
