@@ -1,6 +1,6 @@
 {
   "name": "module-alias-jest",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Define your node path aliases once, use everywhere",
   "main": "index.js",
   "author": "mpcarolin.dev@gmail.com",
@@ -20,7 +20,9 @@
     "@keg-hub/jsutils": "8.6.0",
     "app-root-path": "3.0.0",
     "jest": "27.0.1",
-    "module-alias": "2.2.2",
+    "module-alias": "2.2.2"
+  },
+  "devDependencies": {
     "module-alias-jest": "file:./"
   }
 }
