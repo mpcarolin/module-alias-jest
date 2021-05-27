@@ -27,13 +27,16 @@ const resolveAbsolutes = (aliases, location) => {
 /**
  * Registers aliases from the package.json located at the app root, or the `location` path if defined.
  * Expects either _aliases or _moduleAliases to be the package key.
- * @param {string?} location - optional alternative to the app root path to search for a package.json file
+ * @param {Object} options
+ * @param {string?} options.root - app root path to search for a package.json file. If omitted, registerAliases uses the appRootPath.
+ * @param {boolean} resolve - If true, registerAliases will resolve full file paths for the alias values, relative to options.root, (defaults to true)
  */
-const registerAliases = (location=appRoot) => {
-  state.aliases = resolveAbsolutes(
-    getPackageAliases(location),
-    location
-  )
+const registerAliases = ({ root=appRoot, resolve=true }) => {
+  const pkgAliases = getPackageAliases(root)
+
+  state.aliases = resolve
+    ? resolveAbsolutes(pkgAliases, root)
+    : pkgAliases
 
   moduleAlias.addAliases(state.aliases)
 

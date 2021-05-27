@@ -25,7 +25,7 @@ const moduleAlias = require('module-alias')
 
 describe('Register', () => {
   it('should register with the state', () => {
-    const aliases = registerAliases(testRoot)
+    const aliases = registerAliases({ root: testRoot })
 
     expect(moduleAlias.addAliases).toHaveBeenCalledWith(
       expect.objectContaining(expectedNode)
@@ -40,7 +40,7 @@ describe('getJestAliases', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     reset()
-    registerAliases(testRoot)
+    registerAliases({ root: testRoot })
   })
 
   it('should should return an object of jest-formatted aliases', () => {
@@ -69,7 +69,7 @@ describe('Adding aliases', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     reset()
-    registerAliases(testRoot)
+    registerAliases({ root: testRoot })
   })
 
   it('should update the alias state individually', () => {
