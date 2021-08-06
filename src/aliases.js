@@ -83,7 +83,7 @@ const getJestAliases = aliasHandler => Object.entries(state.aliases).reduce(
     if (isFunc(aliasHandler))
       return aliasHandler(aliasMap, key, path)
 
-    const formattedKey = key + '(.*)'
+    const formattedKey = key + '/(.*)'
     aliasMap[formattedKey] = pathJoin(path, '$1')
     return aliasMap
   },

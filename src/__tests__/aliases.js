@@ -17,8 +17,8 @@ const expectedNode = {
 }
 
 const expectedJest = { 
-  'foo(.*)': expect.stringMatching(new RegExp(`${resolvedPaths.bar + pathSep.replace(/\\/g,'\\\\')}\\$1$`)),
-  'baz(.*)': expect.stringMatching(new RegExp(`${resolvedPaths.bizboo + pathSep.replace(/\\/g,'\\\\')}\\$1$`)),
+  'foo/(.*)': expect.stringMatching(new RegExp(`${resolvedPaths.bar + pathSep.replace(/\\/g,'\\\\')}\\$1$`)),
+  'baz/(.*)': expect.stringMatching(new RegExp(`${resolvedPaths.bizboo + pathSep.replace(/\\/g,'\\\\')}\\$1$`)),
 }
 
 jest.mock('@keg-hub/jsutils/src/node', () => ({
@@ -105,7 +105,7 @@ describe('Adding aliases', () => {
     expect(aliases).toEqual(
       expect.objectContaining({
         ...expectedJest,
-        'bam(.*)': pathJoin('kapow','$1')
+        'bam/(.*)': pathJoin('kapow','$1')
       })
     )
   })
