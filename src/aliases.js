@@ -3,16 +3,17 @@ const { isFunc } = require('@keg-hub/jsutils')
 const moduleAlias = require('module-alias')
 const appRoot = require('app-root-path').path
 const path = require('path')
+const pathJoin = path.join
 
-const state = { 
+const state = {
   aliases: {}
 }
 
 /**
  * Creates full paths for each alias, which are assumed relative to location
- * @param {Object} aliases 
- * @param {String} location 
- * @returns 
+ * @param {Object} aliases
+ * @param {String} location
+ * @returns
  */
 const resolveAbsolutes = (aliases, location) => {
   return Object.entries(aliases).reduce(
@@ -48,8 +49,8 @@ const registerAliases = ({ root=appRoot, resolve=true }={}) => {
 
 /**
  * Adds the alias programmatically
- * @param {string} key 
- * @param {string} path 
+ * @param {string} key
+ * @param {string} path
  */
 const addAlias = (key, path) => {
   state.aliases[key] = path
@@ -58,7 +59,7 @@ const addAlias = (key, path) => {
 
 /**
  * Adds the aliases programmatically
- * @param {Object} aliases 
+ * @param {Object} aliases
  */
 const addAliases = (aliases) => {
   state.aliases = {
@@ -83,7 +84,7 @@ const getJestAliases = aliasHandler => Object.entries(state.aliases).reduce(
       return aliasHandler(aliasMap, key, path)
 
     const formattedKey = key + '(.*)'
-    aliasMap[formattedKey] = path + '$1'
+    aliasMap[formattedKey] = pathJoin(path, '$1')
     return aliasMap
   },
   {}
