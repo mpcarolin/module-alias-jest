@@ -1,17 +1,24 @@
-const testRoot = 'some-path'
+const path = require('node:path')
+const { join: pathJoin, sep: pathSep } = path
+const testRoot = path.resolve('some-path')
 const mockAliases = {
   foo: 'bar',
   baz: 'bizboo'
 }
 
+const resolvedPaths = {
+  bar: pathJoin(testRoot,'bar').replace(/\\/g,'\\\\'),
+  bizboo: pathJoin(testRoot,'bizboo').replace(/\\/g,'\\\\'),
+}
+
 const expectedNode = {
-  foo: expect.stringMatching(/some-path\/bar$/),
-  baz: expect.stringMatching(/some-path\/bizboo$/)
+  foo: expect.stringMatching(new RegExp(`${resolvedPaths.bar}$`)),
+  baz: expect.stringMatching(new RegExp(`${resolvedPaths.bizboo}$`))
 }
 
 const expectedJest = { 
-  'foo(.*)': expect.stringMatching(/some-path\/bar\$1$/),
-  'baz(.*)': expect.stringMatching(/some-path\/bizboo\$1$/)
+  'foo/(.*)': expect.stringMatching(new RegExp(`${resolvedPaths.bar + pathSep.replace(/\\/g,'\\\\')}\\$1$`)),
+  'baz/(.*)': expect.stringMatching(new RegExp(`${resolvedPaths.bizboo + pathSep.replace(/\\/g,'\\\\')}\\$1$`)),
 }
 
 jest.mock('@keg-hub/jsutils/src/node', () => ({
@@ -31,8 +38,8 @@ describe('Register', () => {
       expect.objectContaining(expectedNode)
     )
 
-    expect(aliases.node).toEqual(expectedNode)
-    expect(aliases.jest).toEqual(expectedJest)
+    expect(aliases.node).toMatchObject(expectedNode)
+    expect(aliases.jest).toMatchObject(expectedJest)
   })
 })
 
@@ -58,8 +65,8 @@ describe('getJestAliases', () => {
 
     expect(aliases).toEqual(
       expect.objectContaining({ 
-        foo: expect.stringMatching(/.+some-path\/bar123$/),
-        baz: expect.stringMatching(/.+some-path\/bizboo123$/)
+        foo: expect.stringMatching(new RegExp(`${resolvedPaths.bar}123$`)),
+        baz: expect.stringMatching(new RegExp(`${resolvedPaths.bizboo}123$`))
       })
     )
   })
@@ -98,7 +105,7 @@ describe('Adding aliases', () => {
     expect(aliases).toEqual(
       expect.objectContaining({
         ...expectedJest,
-        'bam(.*)': 'kapow$1'
+        'bam/(.*)': pathJoin('kapow','$1')
       })
     )
   })
