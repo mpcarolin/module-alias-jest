@@ -1,13 +1,16 @@
 {
   "name": "module-alias-jest",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Define your node path aliases once, use everywhere",
   "main": "index.js",
-  "author": "mpcarolin.dev@gmail.com",
+  "authors": [
+    "mpcarolin.dev@gmail.com",
+    "pianobit <info@pianobit.com> (http://pianobit.com)"
+  ],  
   "license": "MIT",
   "private": false,
   "repository": {
-    "url": "https://github.com/mpcarolin/module-alias-jest"
+    "url": "https://github.com/pibi/module-alias-jest"
   },
   "scripts": {
     "test": "yarn jest",
@@ -19,10 +22,13 @@
   "dependencies": {
     "@keg-hub/jsutils": "8.6.0",
     "app-root-path": "3.0.0",
-    "jest": "27.0.1",
     "module-alias": "2.2.2"
   },
   "devDependencies": {
-    "module-alias-jest": "file:./"
+    "module-alias-jest": "file:./",
+    "jest": "^27.1.x"
+  },
+  "peerDependencies": {
+    "jest": "^27.1.x"
   }
 }
